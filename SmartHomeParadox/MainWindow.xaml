@@ -1,0 +1,155 @@
+﻿<Window x:Class="SmartHomeParadox.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SmartHomeParadox"
+        mc:Ignorable="d"
+        Title="MainWindow"
+        Height="450"
+        Closing="Window_Closing"
+        Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="2*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2.8*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Button Name="BtnConnect"
+                    Content="Connect"
+                    Margin="5"
+                    Click="BtnConnect_Click" />
+            <Button Name="BtnGetAlarmInfo"
+                    IsEnabled="False"
+                    Grid.Column="1"
+                    Margin="5"
+                    Content="Get Alarm Information"
+                    Click="BtnGetAlarmInfo_Click" />
+            <Button Name="BtnGetVersionInfo"
+                    Grid.Column="2"
+                    IsEnabled="False"
+                    Margin="5"
+                    Content="Get Version Information" />
+            <Button Name="BtnGetDeviceStatus"
+                    Grid.Column="0"
+                    IsEnabled="False"
+                    Grid.Row="1"
+                    Margin="5"
+                    Content="Get Device Status"
+                    Click="BtnGetDeviceStatus_Click" />
+            <ComboBox Name="CmbArming"
+                      DropDownClosed="CmbArming_DropDownClosed"
+                      Grid.Column="1"
+                      IsEnabled="False"
+                      Grid.Row="1"
+                      Margin="5"
+                      HorizontalContentAlignment="Center"
+                      VerticalContentAlignment="Center">
+                <ComboBoxItem Selector.IsSelected="True">None</ComboBoxItem>
+                <ComboBoxItem>Regular Arm</ComboBoxItem>
+                <ComboBoxItem>Sleep</ComboBoxItem>
+                <ComboBoxItem>Stay</ComboBoxItem>
+                <ComboBoxItem>Off</ComboBoxItem>
+            </ComboBox>
+            <Button Name="BtnChangeArm"
+                    Grid.Column="2"
+                    IsEnabled="False"
+                    Grid.Row="1"
+                    Margin="5"
+                    Content="Set Alarm Action"
+                    Click="BtnChangeArm_Click" />
+        </Grid>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Ellipse Name="ChkArm"
+                     Height="24"
+                     Width="24"
+                     Fill="Red"
+                     StrokeThickness="1"
+                     Stroke="Black" />
+            <TextBlock Text="ARM"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Margin="5" />
+            <Ellipse Name="ChkSleep"
+                     Grid.Row="1"
+                     Height="24"
+                     Width="24"
+                     Fill="Red"
+                     StrokeThickness="1"
+                     Stroke="Black" />
+            <TextBlock Text="Sleep"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Margin="5" />
+            <Ellipse Name="ChkStay"
+                     Grid.Row="2"
+                     Height="24"
+                     Width="24"
+                     Fill="Red"
+                     StrokeThickness="1"
+                     Stroke="Black" />
+            <TextBlock Text="Stay"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Margin="5" />
+            <Ellipse Name="ChkDisarm"
+                     Grid.Row="3"
+                     Height="24"
+                     Width="24"
+                     Fill="Red"
+                     StrokeThickness="1"
+                     Stroke="Black" />
+            <TextBlock Text="Off"
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       VerticalAlignment="Center"
+                       Margin="5" />
+        </Grid>
+        <Grid Grid.Row="1"
+              Grid.ColumnSpan="2">
+            <!--<TabControl Margin="5">
+                <TabItem Header="Alarm Info">Alarm Information</TabItem>
+                <TabItem Header="Version Info">Alarm Information</TabItem>
+                <TabItem Header="Device Info">-->
+                    <ListBox Name="LstDevices"
+                             ItemsSource="{Binding AllDevices}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Text="{Binding DeviceType}" />
+                                    <TextBlock Text="{Binding Status}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                <!--</TabItem>
+            </TabControl>-->
+        </Grid>
+    </Grid>
+</Window>
